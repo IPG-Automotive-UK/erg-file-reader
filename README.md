@@ -1,6 +1,6 @@
 # IPG Automotive erg file reader
 
-This is a JavaScript file importer for IPG Automotive .erg result files. The importer requires a .erg file and corresponding .info file.
+JavaScript file reader for IPG Automotive .erg result files. The reader requires a .erg file and corresponding .info file.
 
 The data is returned as an array of quantity objects. Each object represents a quantity and contains the following properties:
 
