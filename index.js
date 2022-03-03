@@ -52,7 +52,7 @@ function readInfoQuants (infoFile) {
 // read erg and info file
 function read (ergFile, infoFile) {
   // read info file
-  let quants = exports.readInfoQuants(infoFile);
+  let quants = readInfoQuants(infoFile);
 
   // read erg file
   let ergBuffer = fs.readFileSync(ergFile);
