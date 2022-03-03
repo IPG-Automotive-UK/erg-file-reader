@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-exports.readInfoHeader = function (infoFile) {
+function readInfoHeader (infoFile) {
   const info = fs.readFileSync(infoFile, "utf8").replace(/\r/g, "").split("\n");
   let headerInfo = {};
 
@@ -19,7 +19,7 @@ exports.readInfoHeader = function (infoFile) {
   return headerInfo;
 
 }
-exports.readInfoQuants = function (infoFile) {
+function readInfoQuants (infoFile) {
   const info = fs.readFileSync(infoFile, "utf8").replace(/\r/g, "").split("\n");
 
   // extract quantity info
@@ -50,7 +50,7 @@ exports.readInfoQuants = function (infoFile) {
   return quants;
 }
 // read erg and info file
-exports.read = function (ergFile, infoFile) {
+function read (ergFile, infoFile) {
   // read info file
   let quants = exports.readInfoQuants(infoFile);
 
@@ -193,3 +193,4 @@ exports.read = function (ergFile, infoFile) {
   }
   return quants;
 };
+export default {read, readInfoHeader, readInfoQuants};
