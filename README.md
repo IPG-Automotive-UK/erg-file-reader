@@ -37,3 +37,13 @@ Read the data
 ```
 let data = erg.read(ergFile, infoFile);
 ```
+Read Quantity definitions from InfoFile
+
+```
+let data = erg.readInfoQuants(infoFile);
+```
+Read Header/Infos (Date, Testrun Name, CarMaker Version) from InfoFole
+
+```
+let data = erg.readInfoHeader(infoFile);
+```
