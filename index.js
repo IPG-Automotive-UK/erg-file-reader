@@ -1,25 +1,22 @@
 const fs = require("fs");
 
-function readInfoHeader (infoFile) {
+function readInfoHeader(infoFile) {
   const info = fs.readFileSync(infoFile, "utf8").replace(/\r/g, "").split("\n");
   let headerInfo = {};
 
   info.forEach((line) => {
     //Date
-    if (line.startsWith(`File.DateLocal`)){
+    if (line.startsWith(`File.DateLocal`)) {
       headerInfo[`Date`] = line.split("= ")[1];
-    }
-    else if(line.startsWith(`Testrun =`)){
+    } else if (line.startsWith(`Testrun =`)) {
       headerInfo[`Testrun`] = line.split("= ")[1];
-    }
-    else if(line.startsWith(`CarMaker.Version =`)){
+    } else if (line.startsWith(`CarMaker.Version =`)) {
       headerInfo[`CM_Version`] = line.split("= ")[1];
     }
   });
   return headerInfo;
-
 }
-function readInfoQuants (infoFile) {
+function readInfoQuants(infoFile) {
   const info = fs.readFileSync(infoFile, "utf8").replace(/\r/g, "").split("\n");
 
   // extract quantity info
@@ -50,7 +47,7 @@ function readInfoQuants (infoFile) {
   return quants;
 }
 // read erg and info file
-function read (ergFile, infoFile) {
+function read(ergFile, infoFile) {
   // read info file
   let quants = readInfoQuants(infoFile);
 
@@ -192,5 +189,6 @@ function read (ergFile, infoFile) {
     });
   }
   return quants;
-};
-export default {read, readInfoHeader, readInfoQuants};
+}
+
+module.exports = { read, readInfoHeader, readInfoQuants };
