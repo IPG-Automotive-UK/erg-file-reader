@@ -32,18 +32,18 @@ let ergFile = "MyFile.erg";
 let infoFile = "MyFile.erg.info";
 ```
 
-Read the data
+Read the data for all quantities
 
 ```
 let data = erg.read(ergFile, infoFile);
 ```
-Read Quantity definitions from InfoFile
+Read quantity definitions - no data values are returned, just the name and unit of each quantity
 
 ```
-let data = erg.readInfoQuants(infoFile);
+let quants = erg.readInfoQuants(infoFile);
 ```
-Read Header/Infos (Date, Testrun Name, CarMaker Version) from InfoFole
+Read header information - Date, Testrun Name, CarMaker Version
 
 ```
-let data = erg.readInfoHeader(infoFile);
+let header = erg.readInfoHeader(infoFile);
 ```
