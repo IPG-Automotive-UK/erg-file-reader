@@ -214,3 +214,4 @@ function read(ergFile: string, infoFile: string) {
 }
 
 export { read, readInfoHeader, readInfoQuants };
+export default { read, readInfoHeader, readInfoQuants };
