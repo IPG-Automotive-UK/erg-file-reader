@@ -1,11 +1,18 @@
-const fs = require("fs");
+import fs from "fs";
 
 // returns header information from info file
-function readInfoHeader(infoFile) {
+function readInfoHeader(infoFile: string) {
   // read the info file
-  const info = fs.readFileSync(infoFile, "utf8").replace(/\r/g, "").split("\n");
-  let headerInfo = {};
-  
+  const info: string[] = fs
+    .readFileSync(infoFile, "utf8")
+    .replace(/\r/g, "")
+    .split("\n");
+  let headerInfo: {
+    Date?: string;
+    Testrun?: string;
+    CM_Version?: string;
+  } = {};
+
   // extract header info
   info.forEach((line) => {
     if (line.startsWith(`File.DateLocal`)) {
@@ -23,14 +30,22 @@ function readInfoHeader(infoFile) {
 }
 
 // returns quantity information from info file
-function readInfoQuants(infoFile) {
+function readInfoQuants(infoFile: string) {
   // read the info file
-  const info = fs.readFileSync(infoFile, "utf8").replace(/\r/g, "").split("\n");
+  const info: string[] = fs
+    .readFileSync(infoFile, "utf8")
+    .replace(/\r/g, "")
+    .split("\n");
 
   // extract quantity info
   let quantNumber = 1;
   let lastQuantName = "";
-  let quants = [];
+  let quants: {
+    name: string;
+    type: string;
+    unit: string;
+    values: (string | number)[];
+  }[] = [];
   info.forEach((line) => {
     // name
     if (line.startsWith(`File.At.${quantNumber}.Name`)) {
@@ -56,7 +71,7 @@ function readInfoQuants(infoFile) {
 }
 
 // read erg and info file and return data values for each quantity
-function read(ergFile, infoFile) {
+function read(ergFile: string, infoFile: string) {
   // read info file
   let quants = readInfoQuants(infoFile);
 
@@ -69,8 +84,6 @@ function read(ergFile, infoFile) {
     format: headerBuffer.toString("ascii", 0, 7),
     version: headerBuffer.readUInt8(8),
     byteOrder: headerBuffer.readUInt8(9),
-    recordSize: headerBuffer.readUInt8(10, 11),
-    reserved: headerBuffer.readUInt8(12, 15),
   };
 
   // process erg records by reading value for each quantity
@@ -200,4 +213,4 @@ function read(ergFile, infoFile) {
   return quants;
 }
 
-module.exports = { read, readInfoHeader, readInfoQuants };
+export { read, readInfoHeader, readInfoQuants };
