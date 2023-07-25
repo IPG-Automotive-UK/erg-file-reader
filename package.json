@@ -2,7 +2,16 @@
   "name": "@ipguk/erg-file-reader",
   "version": "1.0.0",
   "description": "File reader for IPG Automotive .erg result files",
-  "main": "index.js",
   "author": "IPG Automotive UK",
-  "license": "MIT"
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --declaration",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.4",
+    "typescript": "^5.1.6"
+  }
 }
