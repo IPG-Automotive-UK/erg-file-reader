@@ -1,5 +1,36 @@
 import fs from "fs";
 
+function validateInfoHeader(infoFile: string) {
+  // read infofile
+  const info: string[] = fs
+    .readFileSync(infoFile, "utf8")
+    .replace(/\r/g, "")
+    .split("\n");
+
+  let validFormat = false;
+  let validInfofile = false;
+
+  // check that first line of infofile is valid
+  if (info[0].startsWith("#INFOFILE1.1")) {
+    validInfofile = true;
+  }
+
+  // Check that file format is erg
+  info.forEach((line) => {
+    if (line.startsWith("File.Format")) {
+      if (line.includes("erg")) {
+        validFormat = true;
+      }
+    }
+  });
+
+  // Return True if valid, false if invalid
+  if (validFormat && validInfofile) {
+    return true;
+  } else {
+    return false;
+  }
+}
 // returns header information from info file
 function readInfoHeader(infoFile: string) {
   // read the info file
@@ -74,6 +105,11 @@ function readInfoQuants(infoFile: string) {
 function read(ergFile: string, infoFile: string) {
   // read info file
   let quants = readInfoQuants(infoFile);
+
+  // error if there are no quantities in erg infofile
+  if (quants.length < 1) {
+    throw new Error("ERG File does not contain any quantities");
+  }
 
   // read erg file
   let ergBuffer = fs.readFileSync(ergFile);
@@ -213,5 +249,5 @@ function read(ergFile: string, infoFile: string) {
   return quants;
 }
 
-export { read, readInfoHeader, readInfoQuants };
-export default { read, readInfoHeader, readInfoQuants };
+export { read, readInfoHeader, readInfoQuants, validateInfoHeader };
+export default { read, readInfoHeader, readInfoQuants, validateInfoHeader };
