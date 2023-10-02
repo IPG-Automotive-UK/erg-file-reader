@@ -1,5 +1,10 @@
 import fs from "fs";
 
+/**
+ * Validates a CarMaker erg Infofile
+ * @param infoFile Path to CarMaker erg InfoFile
+ * @returns true if valid erg infofile, false if invalid
+ */
 function validateInfoHeader(infoFile: string) {
   // read infofile
   const info: string[] = fs
@@ -16,22 +21,21 @@ function validateInfoHeader(infoFile: string) {
   }
 
   // Check that file format is erg
-  info.forEach((line) => {
-    if (line.startsWith("File.Format")) {
-      if (line.includes("erg")) {
-        validFormat = true;
-      }
+  for (const line of info) {
+    if (line.startsWith("File.Format") && line.includes("erg")) {
+      validFormat = true;
+      break;
     }
-  });
-
-  // Return True if valid, false if invalid
-  if (validFormat && validInfofile) {
-    return true;
-  } else {
-    return false;
   }
+
+  return validFormat && validInfofile;
 }
-// returns header information from info file
+
+/**
+ * Read the erg infofile header.
+ * @param infoFile Path to CarMaker erg InfoFile.
+ * @returns Object containing erg file metadata.
+ */
 function readInfoHeader(infoFile: string) {
   // read the info file
   const info: string[] = fs
@@ -60,7 +64,11 @@ function readInfoHeader(infoFile: string) {
   return headerInfo;
 }
 
-// returns quantity information from info file
+/**
+ * Read list of quantities from erg infofile.
+ * @param infoFile Path to CarMaker erg InfoFile.
+ * @returns Array of objects containing erg file quantity names.
+ */
 function readInfoQuants(infoFile: string) {
   // read the info file
   const info: string[] = fs
@@ -100,8 +108,12 @@ function readInfoQuants(infoFile: string) {
   });
   return quants;
 }
-
-// read erg and info file and return data values for each quantity
+/**
+ *  Read erg and info file and return data values for each quantity.
+ * @param ergFile Path to CarMaker erg file.
+ * @param infoFile Path to CarMaker erg InfoFile.
+ * @returns Array of CarMaker quantities
+ */
 function read(ergFile: string, infoFile: string) {
   // read info file
   let quants = readInfoQuants(infoFile);
