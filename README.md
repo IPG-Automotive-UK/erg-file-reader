@@ -37,13 +37,26 @@ Read the data for all quantities
 ```
 let data = erg.read(ergFile, infoFile);
 ```
+
 Read quantity definitions - no data values are returned, just the name and unit of each quantity
 
 ```
 let quants = erg.readInfoQuants(infoFile);
 ```
+
 Read header information - Date, Testrun Name, CarMaker Version
 
 ```
 let header = erg.readInfoHeader(infoFile);
+```
+
+Validate ERG InfoFile
+
+```
+if(erg.validateInfoHeader){
+    console.log("Valid ERG InfoFile)
+}
+else{
+    console.log("Invalid ERG InfoFile)
+}
 ```
