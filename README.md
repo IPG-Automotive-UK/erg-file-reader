@@ -54,9 +54,9 @@ Validate ERG InfoFile
 
 ```
 if(erg.validateInfoHeader(infoFile)){
-    console.log("Valid ERG InfoFile)
+    console.log("Valid ERG InfoFile);
 }
 else{
-    console.log("Invalid ERG InfoFile)
+    console.log("Invalid ERG InfoFile);
 }
 ```
