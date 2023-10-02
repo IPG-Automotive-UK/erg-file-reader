@@ -53,7 +53,7 @@ let header = erg.readInfoHeader(infoFile);
 Validate ERG InfoFile
 
 ```
-if(erg.validateInfoHeader){
+if(erg.validateInfoHeader(infoFile)){
     console.log("Valid ERG InfoFile)
 }
 else{
