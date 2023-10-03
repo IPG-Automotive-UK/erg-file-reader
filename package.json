@@ -1,6 +1,6 @@
 {
   "name": "@ipguk/erg-file-reader",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "File reader for IPG Automotive .erg result files",
   "author": "IPG Automotive UK",
   "license": "MIT",
