@@ -134,6 +134,11 @@ function read(ergFile: string, infoFile: string) {
     byteOrder: headerBuffer.readUInt8(9),
   };
 
+  // Check format specified in the ERG header. Error if not ERG
+  if (!ergHeader.format.startsWith("CM-ERG")) {
+    throw new Error("Invalid ERG file");
+  }
+
   // process erg records by reading value for each quantity
   let recordBuffer = ergBuffer.slice(16);
   let recordIndex = 0;
